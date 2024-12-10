@@ -27,4 +27,8 @@ public interface BrandMapper {
     List<Brand> selectByCondition(Map map);
 
     List<Brand> selectByConditionSingle(Brand brand);
+
+    void addBrand(Brand brand);
+
+    int update(Brand brand);
 }
