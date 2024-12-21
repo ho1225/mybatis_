@@ -77,8 +77,6 @@ public class MyBatisTest {
 //        map.put("brandName", brandName);
 
 
-
-
         String resource = "mybatis-config.xml";
 
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -141,7 +139,6 @@ public class MyBatisTest {
         int ordered = 100;
 
 
-
         Brand brand = new Brand();
         brand.setStatus(status);
         brand.setCompanyName(companyName);
@@ -178,7 +175,6 @@ public class MyBatisTest {
         int ordered = 100;
 
 
-
         Brand brand = new Brand();
         brand.setStatus(status);
         brand.setCompanyName(companyName);
@@ -206,7 +202,6 @@ public class MyBatisTest {
 
         sqlSession.close();
     }
-
 
 
     @Test
@@ -242,6 +237,48 @@ public class MyBatisTest {
 
         int count = brandMapper.update(brand);
         System.out.println(count);
+
+        sqlSession.commit();
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteById() throws IOException {
+        int id = 8;
+        String resource = "mybatis-config.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        brandMapper.deleteById(id);
+
+        sqlSession.commit();
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testDeleteByIds() throws IOException {
+        int[] ids = {6,7,9};
+        String resource = "mybatis-config.xml";
+
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        brandMapper.deleteByIds(ids);
 
         sqlSession.commit();
 

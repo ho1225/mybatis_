@@ -97,7 +97,6 @@
     </select>
 
 
-
     <insert id="addBrand" useGeneratedKeys="true" keyProperty="id">
         insert into tb_brand (brand_name, company_name, ordered, description, status)
         values (#{brandName}, #{companyName}, #{ordered}, #{description}, #{status});
@@ -125,5 +124,19 @@
         </set>
         where id = #{id};
     </update>
+
+
+    <delete id="deleteById">
+        delete from tb_brand where id = #{id};
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from tb_brand where id
+        in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+        ;
+    </delete>
 </mapper>
 

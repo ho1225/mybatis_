@@ -1,6 +1,7 @@
 package com.schh.mapper;
 
 import com.schh.pojo.Brand;
+import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
@@ -31,4 +32,8 @@ public interface BrandMapper {
     void addBrand(Brand brand);
 
     int update(Brand brand);
+
+    void deleteById(int id);
+
+    void deleteByIds(@Param("ids") int[] ids);
 }
